@@ -18,7 +18,7 @@ VALIDATE () {
 }
       
 #for package in $@
-for package in (nginx mysql nodejs)
+for package in {nginx mysql nodejs}
 do
   dnf install $package -y &>> $LoGS_FILE
   VALIDATE $? "Installing $package"
