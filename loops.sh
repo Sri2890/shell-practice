@@ -17,7 +17,7 @@ VALIDATE () {
   fi
 }
       
-for package in $@
+for package in $@ # ./loops.sh nginx mysql nodejs
 # for package in nginx mysql nodejs
 do
     dnf list installed $package &>> $LoGS_FILE
