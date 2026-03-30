@@ -19,7 +19,7 @@ VALIDATE () {
 
 for package in $@
 do
-  dnf install $pckage -y &>> $LoGS_FILE
+  dnf install $package -y &>> $LoGS_FILE
   VALIDATE $? "Installing $package"
 done
 
