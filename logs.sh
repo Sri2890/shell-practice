@@ -1,9 +1,11 @@
 #! /bin/bash
 USERID=$(id -u)
 LOGS_FOlDER="/var/log/shell-script"
+LoGS_FILE="$LOGS_FOlDER/0.log"
+
 if [ $USERID -ne 0 ]; then
   echo "Please run the script as root or with sudo."
-  exit 1
+# exit 1
 fi
 
 VALIDATE () {
@@ -15,13 +17,13 @@ VALIDATE () {
   fi
 }
 
-dnf install nginx -y
+dnf install nginx -y &>> $LoGS_FILE
 VALIDATE $? "Installing nginx web server"
 
 
-dnf install mysql -y
+dnf install mysql -y &>> $LoGS_FILE
 VALIDATE $? "Installing mysql database server"
 
-dnf install nodejs -y
+dnf install nodejs -y &>> $LoGS_FILE    
 VALIDATE $? "Installing nodejs runtime"
 
