@@ -14,11 +14,11 @@ VALIDATE () {
   fi
 }
 
-dnf install nginx -y
+dnf install ngninx -y
 VALIDATE $? "Installing nginx web server"
 
 
-dnf install mysql -y
+dnf install mysqdl -y
 VALIDATE $? "Installing mysql database server"
 
 dnf install nodejs -y
