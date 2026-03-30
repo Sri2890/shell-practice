@@ -17,10 +17,16 @@ VALIDATE () {
   fi
 }
       
-#for package in $@
-for package in nginx mysql nodejs
+for package in $@
+# for package in nginx mysql nodejs
 do
-  dnf install $package -y &>> $LoGS_FILE
-  VALIDATE $? "Installing $package"
+    dnf list installed $package &>> $LoGS_FILE
+    if [ $? -ne 0 ]; then
+      echo "$package is not installed. Installing $package..." | tee -a $LoGS_FILE
+      dnf install $package -y &>> $LoGS_FILE
+      VALIDATE $? "Installing $package"
+    else
+      echo "$package is already installed." | tee -a $LoGS_FILE
+    fi  
 done
 
