@@ -17,6 +17,7 @@ do
     --output text)
     
     if [ $instance_id == "frontend" ]; then
+        sleep 30
         IP=$(
             aws ec2 describe-instances \
               --instance-ids $instance_id \
@@ -31,5 +32,5 @@ do
               --output text
         )
     fi
- echo "Launched EC2 instance for $instance_id with IP: $IP"
+ echo "Launched EC2 instance for $instance with IP: $IP"
 done
