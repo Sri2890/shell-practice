@@ -46,9 +46,9 @@ do
       {
         "Action": "UPSERT",
         "ResourceRecordSet": {
-          "Name": "'$record_name' ,
+          "Name": "'$record_name'",
           "Type": "A",
-          "TTL": 1
+          "TTL": 1,
           "ResourceRecords": [
             {
               "Value": "'$IP'"
