@@ -31,5 +31,5 @@ do
               --output text
         )
     fi
- echo "Launched EC2 instance for $instance with IP: $IP"
+ echo "Launched EC2 instance for $instance_id with IP: $IP"
 done
