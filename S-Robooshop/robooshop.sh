@@ -16,7 +16,7 @@ do
     --query 'Instances[0].PrivateIpAddress' \
     --output text)
     
-    if [instance_id == "frontend"]; then
+    if [ $instance_id == "frontend" ]; then
         IP=$(
             aws ec2 describe-instances \
               --instance-ids $instance_id \
@@ -31,5 +31,5 @@ do
               --output text
         )
     fi
-
+ echo "Launched EC2 instance for $instance with IP: $IP"
 done
