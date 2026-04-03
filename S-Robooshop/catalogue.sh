@@ -48,7 +48,7 @@ fi
 mkdir -p /app &>> $LoGS_FILE
 VALIDATE $? "Creating /app directory for application code"
 
-curl -o /tmp/catalogue.zip "https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip" &>> $LoGS_FILE
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>> $LoGS_FILE
 VALIDATE $? "Downloading catalogue application code from S3 bucket"
 
 
@@ -84,7 +84,7 @@ VALIDATE $? "Installing MongoDB shell client"
 
 INDEX=$(mongosh --host $MONGODB_HOST --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 if [ $INDEX -le 0 ]; then
-     mongosh --host $MONGODB_HOST <db/master-data.js &>> $LoGS_FILE
+     mongosh --host $MONGODB_HOST </app/db/master-data.js &>> $LoGS_FILE
     VALIDATE $? "Importing MongoDB schema for catalogue application"
 else
     echo "MongoDB schema for catalogue application already exists. Skipping import." | tee -a $LoGS_FILE
