@@ -42,7 +42,7 @@ fi
 mkdir -p /app &>> $LoGS_FILE
 VALIDATE $? "Creating /app directory for application code"
 
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>> $LoGS_FILE
+curl -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>> $LoGS_FILE
 VALIDATE $? "Downloading shipping application code from S3 bucket"
 
 
@@ -68,6 +68,8 @@ VALIDATE $? "Copying shipping systemd service file to systemd directory"
 
 dnf install mysql -y &>> $LoGS_FILE
 VALIDATE $? "Installing mysql client"
+
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 -e 'use cities'
 
 if [ $? -ne 0 ]; then
   
