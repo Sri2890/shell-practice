@@ -42,7 +42,7 @@ fi
 mkdir -p /app &>> $LoGS_FILE
 VALIDATE $? "Creating /app directory for application code"
 
-curl -o /tmp/shipping.zip "https://roboshop-artifacts.s3.amazonaws.com/shipping.zip" &>> $LoGS_FILE
+curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>> $LoGS_FILE
 VALIDATE $? "Downloading shipping application code from S3 bucket"
 
 
