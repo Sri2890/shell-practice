@@ -57,7 +57,7 @@ VALIDATE $? "Extracting shipping application code"
 
 cd /app 
 mvn clean package 
-validate $? "Building shipping application using maven"
+VALIDATE $? "Building shipping application using maven"
 
 mv target/shipping-1.0.jar shipping.jar &>> $LoGS_FILE
 VALIDATE $? "Building shipping application using maven"
