@@ -27,10 +27,10 @@ VALIDATE () {
   fi
 }
 
-dnf modules disable nodejs -y &>> $LoGS_FILE
+dnf module disable nodejs -y &>> $LoGS_FILE
 VALIDATE $? "Disabling nodejs module to avoid conflicts with nodejs installation"
 
-dnf enable nodejs:20 -y &>> $LoGS_FILE
+dnf module enable nodejs:20 -y &>> $LoGS_FILE
 VALIDATE $? "Enabling nodejs 20 module stream"
 
 dnf install nodejs -y &>> $LoGS_FILE
@@ -84,7 +84,7 @@ VALIDATE $? "Installing MongoDB shell client"
 
 INDEX=$(mongosh --host $MONGODB_HOST --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
 if [ $INDEX -le 0 ]; then
-     mongosh --host $MONGODB_HOST <app/db/master-data.js &>> $LoGS_FILE
+     mongosh --host $MONGODB_HOST <db/master-data.js &>> $LoGS_FILE
     VALIDATE $? "Importing MongoDB schema for catalogue application"
 else
     echo "MongoDB schema for catalogue application already exists. Skipping import." | tee -a $LoGS_FILE
