@@ -65,11 +65,19 @@ VALIDATE $? "Building shipping application using maven"
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service &>> $LoGS_FILE
 VALIDATE $? "Copying shipping systemd service file to systemd directory"
 
+systemctl daemon-reload &>> $LoGS_FILE
+VALIDATE $? "Reloading systemd daemon to apply changes"
+
+systemctl enable shipping &>> $LoGS_FILE
+VALIDATE $? "Enabling shipping service to start on boot"  
+
+systemctl start shipping &>> $LoGS_FILE
+VALIDATE $? "Starting shipping service"
 
 dnf install mysql -y &>> $LoGS_FILE
 VALIDATE $? "Installing mysql client"
 
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 -e 'use cities'
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 
 
 if [ $? -ne 0 ]; then
   
@@ -85,8 +93,7 @@ else
   echo "MySQL schema and data already imported for shipping application." | tee -a $LoGS_FILE  
 fi
 
-systemctl daemon-reload
-systemctl enable shipping 
-systemctl start shipping
-VALIDATE $? "Starting shipping service"
+systemctl restart shipping &>> $LoGS_FILE
+VALIDATE $? "Restarting shipping service to apply changes"
+
 
