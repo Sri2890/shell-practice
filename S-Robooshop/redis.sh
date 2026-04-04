@@ -34,7 +34,7 @@ VALIDATE $? "Enabling redis 7 module stream"
 dnf install redis -y &>> $LoGS_FILE
 VALIDATE $? "Installing redis database server"
 
-sed -i -e 's/127.0.0.1/0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf &>> $LoGS_FILE
+sed -i -e 's/127.0.0.1/0.0.0.0/g' -e '/protected-mode/ c protected-mode no' /etc/redis/redis.conf &>> $LoGS_FILE
 VALIDATE $? "Updating redis.conf file to allow remote connections and disable protected mode"
 
 systemctl enable redis 
