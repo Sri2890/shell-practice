@@ -77,21 +77,18 @@ VALIDATE $? "Starting shipping service"
 dnf install mysql -y &>> $LoGS_FILE
 VALIDATE $? "Installing mysql client"
 
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 
-
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 -e 'use cities'
 if [ $? -ne 0 ]; then
-  
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql &>> $LoGS_FILE
-VALIDATE $? "Importing MySQL schema for shipping application"
 
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql &>> $LoGS_FILE
-VALIDATE $? "Importing MySQL application user for shipping application"
-
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql &>> $LoGS_FILE
-VALIDATE $? "Importing MySQL master data for shipping application"
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOGS_FILE
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOGS_FILE
+    mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql &>>$LOGS_FILE
+    VALIDATE $? "Loaded data into MySQL"
 else
-  echo "MySQL schema and data already imported for shipping application." | tee -a $LoGS_FILE  
+    echo -e "data is already loaded ... $Y SKIPPING $N"
 fi
+
+systemctl enable shipping &>>$LOGS_FILE
 
 systemctl restart shipping &>> $LoGS_FILE
 VALIDATE $? "Restarting shipping service to apply changes"
