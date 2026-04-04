@@ -42,7 +42,7 @@ fi
 mkdir -p /app &>> $LoGS_FILE
 VALIDATE $? "Creating /app directory for application code"
 
-curl -o /tmp/payment.zip "https://roboshop-artifacts.s3.amazonaws.com/payment.zip" &>> $LoGS_FILE
+curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>> $LoGS_FILE
 VALIDATE $? "Downloading payment application code from S3 bucket"
 
 

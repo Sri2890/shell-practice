@@ -48,9 +48,8 @@ fi
 mkdir -p /app &>> $LoGS_FILE
 VALIDATE $? "Creating /app directory for application code"
 
-curl -o /tmp/cart.zip "https://roboshop-artifacts.s3.amazonaws.com/cart.zip" &>> $LoGS_FILE
+curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>> $LoGS_FILE
 VALIDATE $? "Downloading cart application code from S3 bucket"
-
 
 cd /app &>> $LoGS_FILE
 VALIDATE $? "Changing directory to /app"
