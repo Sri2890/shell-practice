@@ -37,7 +37,7 @@ VALIDATE $? "Enabling mongod service to start on boot"
 systemctl start mongod &>> $LoGS_FILE
 VALIDATE $? "Starting mongod service"
 
-sed -i 's/127.0.0.1/0.0.0/g' /etc/mongod.conf   
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf   
 VALIDATE $? "Updating mongod.conf file to allow remote connections"
 
 systemctl restart mongod &>> $LoGS_FILE
