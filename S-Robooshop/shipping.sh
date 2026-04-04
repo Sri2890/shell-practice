@@ -77,7 +77,7 @@ VALIDATE $? "Starting shipping service"
 dnf install mysql -y &>> $LoGS_FILE
 VALIDATE $? "Installing mysql client"
 
-mysql -h $MYSQL_HOST -uroot -pRoboShop@1 -e 'use cities' &>> $LoGS_FILE
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1
 
 if [ $? -ne 0 ]; then
 
